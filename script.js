@@ -312,8 +312,22 @@ function initTRexGame() {
     });
 }
 
+// 添加 HTTPS 检测函数
+function checkAndRedirectToHttps() {
+    if (window.location.protocol !== 'https:' && window.location.hostname !== 'localhost') {
+        // 保存当前的路径和查询参数
+        const currentPath = window.location.pathname + window.location.search + window.location.hash;
+        // 构建新的 HTTPS URL
+        const httpsUrl = 'https://' + window.location.hostname + currentPath;
+        // 重定向到 HTTPS
+        window.location.href = httpsUrl;
+    }
+}
+
 // 页面加载时初始化游戏
 document.addEventListener('DOMContentLoaded', () => {
+    checkAndRedirectToHttps();
+    
     initTicTacToe();
     initTRexGame();
     
